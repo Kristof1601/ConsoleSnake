@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 class Program
 {
@@ -10,6 +11,7 @@ class Program
     public static int snakeLengthBody = 4; //текущий размер Змейки
     public static int[,] gameField = new int[sizeGameField, sizeGameField]; //массив значений поля
     public static int head_X = 0, head_Y = 0;
+    public static Thread backgroundGame = new Thread(backgroundSnake);
 
     public static string directionKey = "8";
 
@@ -17,6 +19,14 @@ class Program
     static void Main(string[] args)
     {
         Console.Title ="Snake in Console. v.1.0";
+        Console.WriteLine("***************");
+        Console.WriteLine("*****Snake*****");
+        Thread.Sleep(1000); //уснуть потоку на столько-то милисекунд
+        Console.WriteLine("***************");
+        Console.WriteLine("***The Game****");
+        Console.WriteLine("***************");
+        Thread.Sleep(3000);
+        Console.Clear();
 
         initializingEmptyField();
 
@@ -148,7 +158,7 @@ class Program
             DrawingGame();
             //directionKey = Console.ReadLine();
             ConsoleKeyInfo presskey = new ConsoleKeyInfo();
-            presskey = Console.ReadKey(false);
+            presskey = Console.ReadKey();
 
             //Задать направление движения
             if (presskey.Key.ToString() == "LeftArrow" && directionKeyTemp != "RightArrow")
@@ -199,6 +209,11 @@ class Program
 
         } // закрывается WHILE
     } //закрывается фу-я Moving()
+
+    static void backgroundSnake()
+    {
+
+    }
 
   
 
